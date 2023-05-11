@@ -5,7 +5,7 @@ const path = require("path");
 
 let config = {
   context: path.join(__dirname, '/src'), // Директория с исходным кодом приложения
-  entry: 'index.js', // Главный файл приложения
+  entry: 'index.jsx', // Главный файл приложения
   output: {
     path: path.join(__dirname, 'dist'), // Куда делать оброку
     filename: '[name].js', // Шаблон для названия файлов
