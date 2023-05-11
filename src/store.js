@@ -49,6 +49,7 @@ class Store {
         code: this.getUniqueID(),
         title: 'Новая запись',
         selected: false,
+        selectCount: 0,
       }],
     });
   };
@@ -73,6 +74,9 @@ class Store {
       ...this.state,
       list: this.state.list.map(item => {
         if (item.code === code) {
+          if (!item.selected) {
+            item.selectCount += 1;
+          }
           item.selected = !item.selected;
         } else {
           item.selected = false;
