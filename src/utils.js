@@ -1,28 +1,22 @@
-const propNames = new Set(['id', 'className', 'textContent', 'onclick']);
-
+const MAX_IDS = 999;
 /**
- * Создание элемента со свойствами и вложенными элементами
- * @param name {String} Название HTML тега
- * @param props {Object} Свойства и атрибуты элемента
- * @param children {...Node} Вложенные элементы
- * @returns {HTMLElement}
+ * Получение случайного уникального ID номера
+ * @returns {Function}
  */
-export function createElement(name, props = {}, ...children) {
-  const element = document.createElement(name);
-
-  // Назначение свойств и атрибутов
-  for (const name of Object.keys(props)) {
-    if (propNames.has(name)) {
-      element[name] = props[name];
-    } else {
-      element.setAttribute(name, props[name]);
+function uniqueIdFabric() {
+  const ids = [];
+  return () => {
+    while (ids.length < MAX_IDS) {
+      const randomId = Math.ceil(Math.random() * 1000);
+      if (!ids.includes(randomId)) {
+        ids.push(randomId);
+        return randomId;
+      }
     }
-  }
-
-  // Вставка вложенных элементов
-  for (const child of children) {
-    element.append(child);
-  }
-
-  return element;
+  };
 }
+/**
+ * Инстанс фабрики генерации случайных уникальных номеров
+ * @returns {Number}
+ */
+export const getUniqueId = uniqueIdFabric();

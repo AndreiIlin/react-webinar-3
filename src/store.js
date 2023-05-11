@@ -2,9 +2,10 @@
  * Хранилище состояния приложения
  */
 class Store {
-  constructor(initState = {}) {
+  constructor(initState = {}, getUniqueID = {}) {
     this.state = initState;
     this.listeners = []; // Слушатели изменений состояния
+    this.getUniqueID = getUniqueID;
   }
 
   /**
@@ -45,7 +46,7 @@ class Store {
     this.setState({
       ...this.state,
       list: [...this.state.list, {
-        code: this.state.list.length + 1,
+        code: this.getUniqueID(),
         title: 'Новая запись',
         selected: false,
       }],

@@ -1,36 +1,38 @@
+import { getUniqueId } from './utils.js';
+
 export const list = [
   {
-    code: 1,
+    code: getUniqueId(),
     title: 'Название элемента',
     selected: false,
   },
   {
-    code: 2,
+    code: getUniqueId(),
     title: 'Некий объект',
     selected: false,
   },
   {
-    code: 3,
+    code: getUniqueId(),
     title: 'Заголовок',
     selected: false,
   },
   {
-    code: 4,
+    code: getUniqueId(),
     title: 'Очень длинное название элемента из семи слов',
     selected: false,
   },
   {
-    code: 5,
+    code: getUniqueId(),
     title: 'Запись',
     selected: false,
   },
   {
-    code: 6,
+    code: getUniqueId(),
     title: 'Шестая запись',
     selected: false,
   },
   {
-    code: 7,
+    code: getUniqueId(),
     title: 'Седьмая запись',
     selected: false,
   },
