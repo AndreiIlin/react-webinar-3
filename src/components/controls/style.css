@@ -1,5 +1,20 @@
 .Controls {
   display: flex;
   justify-content: flex-end;
-  padding: 20px;
+  padding: 18px 21px 18px 0;
+}
+
+.Controls-title {
+  margin: 0 15px 0 0;
+  font-size: 18px;
+}
+
+.Controls-btn {
+  padding: 3px 13px 2px 15px;
+}
+
+.Controls-count {
+  margin: 0 20px 0 0;
+  font-size: 18px;
+  font-weight: 700;
 }

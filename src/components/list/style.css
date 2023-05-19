@@ -5,3 +5,13 @@
 .List-item {
   border-bottom: 1px dashed #ccc;
 }
+
+.List-item:first-child {
+  border-top: 1px dashed #ccc;
+}
+
+.List_empty {
+  text-align: center;
+  font-weight: 700;
+  font-size: 24px;
+}

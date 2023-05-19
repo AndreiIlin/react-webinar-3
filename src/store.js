@@ -1,4 +1,4 @@
-import {generateCode} from "./utils";
+import { generateCode } from './utils';
 
 /**
  * Хранилище состояния приложения
@@ -19,7 +19,7 @@ class Store {
     // Возвращается функция для удаления добавленного слушателя
     return () => {
       this.listeners = this.listeners.filter(item => item !== listener);
-    }
+    };
   }
 
   /**
@@ -46,8 +46,69 @@ class Store {
   addItem() {
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: generateCode(), title: 'Новая запись'}]
-    })
+      list: [...this.state.list, {
+        code: generateCode(),
+        title: 'Новая запись',
+      }],
+    });
+  };
+
+  /**
+   * Добавление новой записи в корзину
+   * @param item
+   */
+  addItemToCart(item) {
+    if (this.state.cart.find(i => i.code === item.code)) {
+      this.setState({
+        ...this.state,
+        cart: this.state.cart.map(i => i.code === item.code ? {
+          ...i,
+          count: i.count += 1,
+        } : i),
+      });
+    } else {
+      this.setState({
+        ...this.state,
+        cart: [
+          ...this.state.cart, {
+            ...item,
+            count: 1,
+          },
+        ],
+      });
+    }
+  };
+
+  /**
+   * Удаление записи из корзины
+   * @param code
+   */
+  removeItemFromCart(code) {
+    this.setState({
+      ...this.state,
+      // Новый список, в котором не будет удаляемой записи
+      cart: this.state.cart.filter(item => item.code !== code),
+    });
+  };
+
+  /**
+   * Открытие модального окна
+   */
+  openModal() {
+    this.setState({
+      ...this.state,
+      isModalOpened: true,
+    });
+  };
+
+  /**
+   * Закрытие модального окна
+   */
+  closeModal() {
+    this.setState({
+      ...this.state,
+      isModalOpened: false,
+    });
   };
 
   /**
@@ -58,8 +119,8 @@ class Store {
     this.setState({
       ...this.state,
       // Новый список, в котором не будет удаляемой записи
-      list: this.state.list.filter(item => item.code !== code)
-    })
+      list: this.state.list.filter(item => item.code !== code),
+    });
   };
 
   /**
@@ -79,10 +140,12 @@ class Store {
           };
         }
         // Сброс выделения если выделена
-        return item.selected ? {...item, selected: false} : item;
-      })
-    })
+        return item.selected ? {
+          ...item,
+          selected: false,
+        } : item;
+      }),
+    });
   }
 }
-
 export default Store;

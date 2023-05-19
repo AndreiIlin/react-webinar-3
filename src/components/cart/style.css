@@ -1,0 +1,20 @@
+.Cart {
+
+}
+
+.Cart-body {
+  padding: 71px 0 89px;
+}
+
+.Cart-results {
+  margin: 10px 110px 0 0;
+  display: flex;
+  justify-content: end;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.Cart-results-text {
+  min-width: 100px;
+  text-align: end;
+}

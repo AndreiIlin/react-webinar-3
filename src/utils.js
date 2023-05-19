@@ -15,7 +15,21 @@ export function plural(value, variants = {}, locale = 'ru-RU') {
   // Возвращаем вариант по ключу, если он есть
   return variants[key] || '';
 }
-
+/**
+ * Числовой формат
+ * Возвращает вариант с учётом правил форматирования денежных средств и валюты под указанную локаль
+ * @param value {Number} Число, под которое выбирается вариант формы.
+ * @param currency {String} Название валюты для отображения.
+ * @param [locale] {String} Локаль (код языка)
+ * @returns {*|string}
+ */
+export function numberFormat(value, locale = 'ru-RU', currency = 'RUB') {
+  return new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency,
+    minimumFractionDigits: 0
+  }).format(value);
+}
 /**
  * Генератор чисел с шагом 1
  * Вариант с замыканием на начальное значение в самовызываемой функции.
@@ -24,7 +38,6 @@ export function plural(value, variants = {}, locale = 'ru-RU') {
 export const generateCode = (function (start = 0) {
   return () => ++start;
 }());
-
 /**
  * Генератор чисел с шагом 1
  * Вариант с генератором.
@@ -40,7 +53,6 @@ export const generateCode1 = (function (start = 0) {
   const gen = realGenerator(start);
   return () => gen.next().value;
 }());
-
 /**
  * Генератор чисел с шагом 1
  * Вариант с использованием функции как объекта для хранения значения value

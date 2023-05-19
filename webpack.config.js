@@ -1,11 +1,10 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-const path = require("path");
-
+const path = require('path');
 let config = {
   context: path.join(__dirname, '/src'), // Директория с исходным кодом приложения
-  entry: 'index.js', // Главный файл приложения
+  entry: 'index.jsx', // Главный файл приложения
   output: {
     path: path.join(__dirname, 'dist'), // Куда делать оброку
     filename: '[name].js', // Шаблон для названия файлов
@@ -22,17 +21,26 @@ let config = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: [{loader: 'babel-loader'}],
+        use: [{ loader: 'babel-loader' }],
       },
       // Правила обработки подключаемых файлов
       {
         test: /\.css$/,
         use: [
-          {loader: MiniCssExtractPlugin.loader, options: {}},
-          {loader: 'css-loader', options: {url: true, import: true}},
-        ]
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {},
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              url: true,
+              import: true,
+            },
+          },
+        ],
       },
-    ]
+    ],
   },
   plugins: [
     new MiniCssExtractPlugin(), // Плагин для вытаскивания собранных стилей в отдельный файл
@@ -43,8 +51,7 @@ let config = {
       base: '/',
     }),
   ],
-}
-
+};
 if (process.env.NODE_ENV === 'development') {
   config.devtool = 'inline-source-map';
   config.devServer = {
@@ -53,5 +60,4 @@ if (process.env.NODE_ENV === 'development') {
     historyApiFallback: true,
   };
 }
-
 module.exports = config;
