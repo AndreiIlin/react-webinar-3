@@ -64,6 +64,7 @@ class Store {
         cart: this.state.cart.map(i => i.code === item.code ? {
           ...i,
           count: i.count += 1,
+          sum: i.sum += i.price,
         } : i),
       });
     } else {
@@ -73,6 +74,7 @@ class Store {
           ...this.state.cart, {
             ...item,
             count: 1,
+            sum: item.price,
           },
         ],
       });

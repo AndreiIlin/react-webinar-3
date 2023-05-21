@@ -17,7 +17,7 @@ function List({
       isCartList ?
         cart.length ? cart.map(item =>
           (<div key={item.code} className="List-item">
-              <CartItem removeItemFromCart={removeItemFromCart} item={item} />,
+              <CartItem removeItemFromCart={removeItemFromCart} item={item} />
             </div>
           ),
         ) : (<p className={'List_empty'}>В корзине пока еще нет товаров</p>)

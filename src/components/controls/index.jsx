@@ -14,7 +14,7 @@ function Controls({
         one: 'товар',
         few: 'товара',
         many: 'товаров',
-      })} / ${numberFormat(cart.reduce((a, b) => a + (b.count * b.price), 0))}` : 'пусто'}</p>
+      })} / ${numberFormat(cart.reduce((a, b) => a + (b.sum), 0))}` : 'пусто'}</p>
       <button className={'Controls-btn'} onClick={openCart}>Перейти</button>
     </div>
   );

@@ -24,7 +24,7 @@ function Cart({
         {cart.length ? (
           <div className={'Cart-results'}>
             <p className={'Cart-results-text'}>Итого</p>
-            <p className={'Cart-results-text'}>{numberFormat(cart.reduce((a, b) => a + (b.count * b.price), 0))}</p>
+            <p className={'Cart-results-text'}>{numberFormat(cart.reduce((a, b) => a + (b.sum), 0))}</p>
           </div>
         ) : null}
       </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { generateCode } from './utils.js';
 import Store from './store.js';
-import App from './App.jsx';
+import App from './app.jsx';
 
 const store = new Store({
   list: [

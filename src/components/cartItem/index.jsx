@@ -12,7 +12,7 @@ function CartItem({
     <Item item={item} onClick={() => removeItemFromCart(item.code)} actionTitle={'Удалить'}>
       {<>
         <div className={'Cart-item-info'}>{numberFormat(item.price)}</div>
-        <div className={'Cart-item-info'}>{item.count} ШТ</div>
+        <div className={'Cart-item-info'}>{item.count} шт</div>
       </>}
     </Item>
   );
