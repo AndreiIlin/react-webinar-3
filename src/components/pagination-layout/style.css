@@ -1,0 +1,6 @@
+.PaginationLayout {
+  margin-top: 22px;
+  padding-right: 21px;
+  display: flex;
+  justify-content: end;
+}

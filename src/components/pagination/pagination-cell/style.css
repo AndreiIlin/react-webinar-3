@@ -1,0 +1,30 @@
+.Pagination-cell {
+  padding: 4px 8px;
+  font-family: Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18.4px;
+  cursor: pointer;
+}
+
+.Pagination-cell:hover {
+  background-color: #E1E1E1;
+}
+
+.Pagination-cell-active {
+  color: #ffffff;
+  background-color: #0087E9;
+}
+
+.Pagination-cell-active:hover {
+  background-color: #0087E9;
+}
+
+.Pagination-cell-ellipsis {
+  color: #CCCCCC;
+  cursor: auto;
+}
+
+.Pagination-cell-ellipsis:hover {
+  background-color: #fff;
+}
