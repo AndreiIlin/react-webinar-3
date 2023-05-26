@@ -1,0 +1,17 @@
+.LanguageSelect {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.LanguageSelect-label {
+  font-weight: 700;
+}
+
+.LanguageSelect-select {
+  padding: 5px 8px;
+  font-size: 16px;
+}

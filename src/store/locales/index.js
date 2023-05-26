@@ -4,21 +4,24 @@ class Locales extends StoreModule {
   initState() {
     return {
       currentLocale: 'ru',
+      availableLocales: [
+        {
+          name: 'ru',
+          default: true,
+        },
+        {
+          name: 'en',
+          default: false,
+        },
+      ],
     };
   }
 
-  changeLocale() {
-    if (this.getState().currentLocale === 'ru') {
-      this.setState({
-        ...this.getState(),
-        currentLocale: 'en',
-      });
-      return;
-    }
+  changeLocale(locale) {
     this.setState({
       ...this.getState(),
-      currentLocale: 'ru',
-    });
+      currentLocale: locale,
+    }, `Current locale changed on ${locale}`);
   }
 }
 export default Locales;

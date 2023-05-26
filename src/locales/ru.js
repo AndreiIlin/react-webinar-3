@@ -4,7 +4,6 @@ export const ru = {
     close: 'Закрыть',
     delete: 'Удалить',
     count: 'шт',
-    main: 'Главная',
     inBasket: 'В корзине',
     goTo: 'Перейти',
     total: 'Итого',
@@ -14,6 +13,9 @@ export const ru = {
       few: 'товара',
       many: 'товаров',
     },
+  },
+  navigation: {
+    main: 'Главная',
   },
   mainPage: {
     head: 'Магазин',
@@ -29,7 +31,11 @@ export const ru = {
     price: 'Цена',
     action: 'Добавить',
   },
-  languageToggle: {
-    translate: 'Переключить язык на английский',
+  languageSelect: {
+    select: 'Выберите язык',
+    locales: {
+      ru: 'Русский',
+      en: 'Английский',
+    },
   },
 };

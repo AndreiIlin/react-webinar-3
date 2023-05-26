@@ -1,19 +1,20 @@
-import {memo} from "react";
-import PropTypes from "prop-types";
+import { memo } from 'react';
+import PropTypes from 'prop-types';
 import './style.css';
-import LanguageToggle from '../language-toggle/index.jsx';
 
-function Head({title}){
+function Head({
+  title,
+  children,
+}) {
   return (
-    <div className='Head'>
+    <div className="Head">
       <h1>{title}</h1>
-      <LanguageToggle />
+      {children}
     </div>
-  )
+  );
 }
-
 Head.propTypes = {
   title: PropTypes.node,
+  children: PropTypes.node,
 };
-
 export default memo(Head);

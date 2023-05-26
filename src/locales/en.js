@@ -4,7 +4,6 @@ export const en = {
     close: 'Close',
     delete: 'Delete',
     count: 'pc',
-    main: 'Main',
     inBasket: 'In Basket',
     goTo: 'Go to',
     total: 'Total',
@@ -14,6 +13,9 @@ export const en = {
       few: 'products',
       many: 'products',
     },
+  },
+  navigation: {
+    main: 'Main',
   },
   mainPage: {
     head: 'Store',
@@ -29,7 +31,11 @@ export const en = {
     price: 'Price',
     action: 'Add',
   },
-  languageToggle: {
-    translate: 'Switch the language to Russian',
+  languageSelect: {
+    select: 'Select a language',
+    locales: {
+      ru: 'Russian',
+      en: 'English',
+    },
   },
-}
+};

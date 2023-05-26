@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import Good from '../../app/good/index.jsx';
+import Good from '../../app/good/index.js';
 
 function GoodPage() {
   return <Good />;

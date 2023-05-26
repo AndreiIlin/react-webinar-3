@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import PaginationCell from './pagination-cell/index.jsx';
+import PaginationCell from './pagination-cell/index.js';
 import React, { useCallback } from 'react';
 import './style.css';
 

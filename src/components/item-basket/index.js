@@ -4,25 +4,25 @@ import PropTypes from 'prop-types';
 import { numberFormat } from '../../utils';
 import { cn as bem } from '@bem-react/classname';
 import './style.css';
-import { useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { routes } from '../../routes.js';
 import { useTranslation } from '../../hooks/use-translation.js';
 
 function ItemBasket(props) {
-  const navigate = useNavigate();
   const cn = bem('ItemBasket');
   const translate = useTranslation('basket');
   const callbacks = {
     onRemove: (e) => props.onRemove(props.item._id),
-    navigateToGoodPage: () => {
-      props.closeModal();
-      navigate(routes.goodById(props.item._id));
-    },
+    closeModal: () => props.closeModal(),
   };
   return (
     <div className={cn()}>
       {/*<div className={cn('code')}>{props.item._id}</div>*/}
-      <div className={cn('title')} onClick={callbacks.navigateToGoodPage}>{props.item.title}</div>
+      <NavLink
+        to={routes.goodById(props.item._id)}
+        className={cn('title')}
+        onClick={callbacks.closeModal}
+      >{props.item.title}</NavLink>
       <div className={cn('right')}>
         <div className={cn('cell')}>{numberFormat(props.item.price)} ₽</div>
         <div className={cn('cell')}>{numberFormat(props.item.amount || 0)} {translate.count}</div>

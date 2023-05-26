@@ -6,9 +6,12 @@ import BasketTool from '../../components/basket-tool';
 import List from '../../components/list';
 import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
-import PaginationLayout from '../../components/pagination-layout/index.jsx';
-import Pagination from '../../components/pagination/index.jsx';
+import PaginationLayout from '../../components/pagination-layout/index.js';
+import Pagination from '../../components/pagination/index.js';
 import { useTranslation } from '../../hooks/use-translation.js';
+import Navbar from '../../components/navbar/index.js';
+import LanguageSelect from '../../components/language-select/index.js';
+import LanguageSelectLayout from '../../components/language-select-layout/index.js';
 
 function Main() {
   const store = useStore();
@@ -18,6 +21,7 @@ function Main() {
     sum: state.basket.sum,
     activePage: state.catalog.activePage,
     pagesCount: state.catalog.pagesCount,
+    locales: state.locales.availableLocales,
   }));
   useEffect(() => {
     store.actions.catalog.load(select.activePage);
@@ -28,6 +32,7 @@ function Main() {
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
     changeActivePage: useCallback((page) => store.actions.catalog.changeActivePage(page), [store]),
+    changeLanguage: useCallback((locale) => store.actions.locales.changeLocale(locale), [store]),
   };
   const renders = {
     item: useCallback((item) => {
@@ -37,11 +42,17 @@ function Main() {
   const translate = useTranslation('mainPage');
   return (
     <PageLayout>
-      <Head title={translate.head} />
+      <Head title={translate.head}>
+        <LanguageSelectLayout>
+          <LanguageSelect changeLanguage={callbacks.changeLanguage} locales={select.locales} />
+        </LanguageSelectLayout>
+      </Head>
       <BasketTool
         onOpen={callbacks.openModalBasket} amount={select.amount}
         sum={select.sum}
-      />
+      >
+        <Navbar />
+      </BasketTool>
       <List list={select.list} renderItem={renders.item} />
       {select.pagesCount ? (
         <PaginationLayout>
