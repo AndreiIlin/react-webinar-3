@@ -1,13 +1,12 @@
-import StoreModule from "../module";
+import StoreModule from '../module';
 
 class Basket extends StoreModule {
-
   initState() {
     return {
       list: [],
       sum: 0,
-      amount: 0
-    }
+      amount: 0,
+    };
   }
 
   /**
@@ -22,26 +21,71 @@ class Basket extends StoreModule {
       let result = item;
       if (item._id === _id) {
         exist = true; // Запомним, что был найден в корзине
-        result = {...item, amount: item.amount + 1};
+        result = {
+          ...item,
+          amount: item.amount + 1,
+        };
       }
       sum += result.price * result.amount;
       return result;
     });
-
     if (!exist) {
       // Поиск товара в каталоге, чтобы его добавить в корзину.
       // @todo В реальном приложении будет запрос к АПИ вместо поиска по состоянию.
       const item = this.store.getState().catalog.list.find(item => item._id === _id);
-      list.push({...item, amount: 1}); // list уже новый, в него можно пушить.
+      list.push({
+        ...item,
+        amount: 1,
+      }); // list уже новый, в него можно пушить.
       // Добавляем к сумме.
       sum += item.price;
     }
-
     this.setState({
       ...this.getState(),
       list,
       sum,
-      amount: list.length
+      amount: list.length,
+    }, 'Добавление в корзину');
+  }
+
+  /**
+   * Добавление товара в корзину со страницы товара
+   * @param _good Товар
+   */
+  addToBasketFromGoodPage(good) {
+    let sum = 0;
+    // Ищем товар в корзине, чтобы увеличить его количество
+    let exist = false;
+    const list = this.getState().list.map(item => {
+      let result = item;
+      if (item._id === good._id) {
+        exist = true; // Запомним, что был найден в корзине
+        result = {
+          ...item,
+          amount: item.amount + 1,
+        };
+      }
+      sum += result.price * result.amount;
+      return result;
+    });
+    if (!exist) {
+      const item = {
+        _id: good._id,
+        title: good.title,
+        price: good.price,
+      };
+      list.push({
+        ...item,
+        amount: 1,
+      }); // list уже новый, в него можно пушить.
+      // Добавляем к сумме.
+      sum += item.price;
+    }
+    this.setState({
+      ...this.getState(),
+      list,
+      sum,
+      amount: list.length,
     }, 'Добавление в корзину');
   }
 
@@ -56,14 +100,12 @@ class Basket extends StoreModule {
       sum += item.price * item.amount;
       return true;
     });
-
     this.setState({
       ...this.getState(),
       list,
       sum,
-      amount: list.length
+      amount: list.length,
     }, 'Удаление из корзины');
   }
 }
-
 export default Basket;

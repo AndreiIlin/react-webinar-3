@@ -41,11 +41,13 @@ function Main() {
         sum={select.sum}
       />
       <List list={select.list} renderItem={renders.item} />
-      {select.pagesCount && (
+      {select.pagesCount ? (
         <PaginationLayout>
-          <Pagination activePage={select.activePage} pagesCount={select.pagesCount} changeActivePage={callbacks.changeActivePage} />
+          <Pagination
+            activePage={select.activePage} pagesCount={select.pagesCount} changeActivePage={callbacks.changeActivePage}
+          />
         </PaginationLayout>
-      )}
+      ) : null}
     </PageLayout>
   );
 }

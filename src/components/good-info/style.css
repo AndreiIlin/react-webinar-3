@@ -1,0 +1,22 @@
+.GoodInfo {
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+}
+
+.GoodInfo-description {
+  margin: 0;
+}
+
+.GoodInfo-price {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.GoodInfo-btn {
+  padding: 3px 8px 2px 9px;
+}

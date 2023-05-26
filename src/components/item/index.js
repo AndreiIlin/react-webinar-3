@@ -1,21 +1,22 @@
-import {memo, useState} from "react";
-import PropTypes from "prop-types";
-import {cn as bem} from '@bem-react/classname';
-import {numberFormat} from "../../utils";
+import { memo } from 'react';
+import PropTypes from 'prop-types';
+import { cn as bem } from '@bem-react/classname';
+import { numberFormat } from '../../utils';
 import './style.css';
+import { routes } from '../../routes.js';
+import { useNavigate } from 'react-router-dom';
 
-function Item(props){
-
+function Item(props) {
+  const navigate = useNavigate();
   const cn = bem('Item');
-
   const callbacks = {
-    onAdd: (e) => props.onAdd(props.item._id)
-  }
-
+    onAdd: (e) => props.onAdd(props.item._id),
+    navigateToGoodPage: () => navigate(routes.goodById(props.item._id)),
+  };
   return (
     <div className={cn()}>
       {/*<div className={cn('code')}>{props.item._id}</div>*/}
-      <div className={cn('title')}>
+      <div className={cn('title')} onClick={callbacks.navigateToGoodPage}>
         {props.item.title}
       </div>
       <div className={cn('actions')}>
@@ -25,18 +26,16 @@ function Item(props){
     </div>
   );
 }
-
 Item.propTypes = {
   item: PropTypes.shape({
     _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     title: PropTypes.string,
-    price: PropTypes.number
+    price: PropTypes.number,
   }).isRequired,
   onAdd: PropTypes.func,
 };
-
 Item.defaultProps = {
-  onAdd: () => {},
-}
-
+  onAdd: () => {
+  },
+};
 export default memo(Item);
