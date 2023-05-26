@@ -5,10 +5,12 @@ import { numberFormat } from '../../utils';
 import './style.css';
 import { routes } from '../../routes.js';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from '../../hooks/use-translation.js';
 
 function Item(props) {
   const navigate = useNavigate();
   const cn = bem('Item');
+  const translate = useTranslation('item');
   const callbacks = {
     onAdd: (e) => props.onAdd(props.item._id),
     navigateToGoodPage: () => navigate(routes.goodById(props.item._id)),
@@ -21,7 +23,7 @@ function Item(props) {
       </div>
       <div className={cn('actions')}>
         <div className={cn('price')}>{numberFormat(props.item.price)} ₽</div>
-        <button onClick={callbacks.onAdd}>Добавить</button>
+        <button onClick={callbacks.onAdd}>{translate.action}</button>
       </div>
     </div>
   );

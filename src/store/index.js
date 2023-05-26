@@ -4,7 +4,6 @@ import * as modules from './exports.js';
  * Хранилище состояния приложения
  */
 class Store {
-
   constructor(initState = {}) {
     this.listeners = []; // Слушатели изменений состояния
     this.state = initState;
@@ -13,6 +12,7 @@ class Store {
      * catalog: Catalog,
      * modals: Modals,
      * good: Good,
+     * locales: Locales,
      * }} */
     this.actions = {};
     for (const name of Object.keys(modules)) {
@@ -31,12 +31,12 @@ class Store {
     // Возвращается функция для удаления добавленного слушателя
     return () => {
       this.listeners = this.listeners.filter(item => item !== listener);
-    }
+    };
   }
 
   /**
    * Выбор состояния
-   * @returns {{basket: Object, catalog: Object, modals: Object, good: Object}}
+   * @returns {{basket: Object, catalog: Object, modals: Object, good: Object, locales: Object}}
    */
   getState() {
     return this.state;
@@ -55,11 +55,9 @@ class Store {
     console.log(`%c${'prev:'}`, `color: ${'#d77332'}`, this.state);
     console.log(`%c${'next:'}`, `color: ${'#2fa827'}`, newState);
     console.groupEnd();
-
     this.state = newState;
     // Вызываем всех слушателей
     for (const listener of this.listeners) listener(this.state);
   }
 }
-
 export default Store;

@@ -8,6 +8,7 @@ import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
 import PaginationLayout from '../../components/pagination-layout/index.jsx';
 import Pagination from '../../components/pagination/index.jsx';
+import { useTranslation } from '../../hooks/use-translation.js';
 
 function Main() {
   const store = useStore();
@@ -33,9 +34,10 @@ function Main() {
       return <Item item={item} onAdd={callbacks.addToBasket} />;
     }, [callbacks.addToBasket]),
   };
+  const translate = useTranslation('mainPage');
   return (
     <PageLayout>
-      <Head title="Магазин" />
+      <Head title={translate.head} />
       <BasketTool
         onOpen={callbacks.openModalBasket} amount={select.amount}
         sum={select.sum}

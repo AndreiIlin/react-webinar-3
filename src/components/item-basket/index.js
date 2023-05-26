@@ -6,10 +6,12 @@ import { cn as bem } from '@bem-react/classname';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
 import { routes } from '../../routes.js';
+import { useTranslation } from '../../hooks/use-translation.js';
 
 function ItemBasket(props) {
   const navigate = useNavigate();
   const cn = bem('ItemBasket');
+  const translate = useTranslation('basket');
   const callbacks = {
     onRemove: (e) => props.onRemove(props.item._id),
     navigateToGoodPage: () => {
@@ -23,9 +25,9 @@ function ItemBasket(props) {
       <div className={cn('title')} onClick={callbacks.navigateToGoodPage}>{props.item.title}</div>
       <div className={cn('right')}>
         <div className={cn('cell')}>{numberFormat(props.item.price)} ₽</div>
-        <div className={cn('cell')}>{numberFormat(props.item.amount || 0)} шт</div>
+        <div className={cn('cell')}>{numberFormat(props.item.amount || 0)} {translate.count}</div>
         <div className={cn('cell')}>
-          <button onClick={callbacks.onRemove}>Удалить</button>
+          <button onClick={callbacks.onRemove}>{translate.delete}</button>
         </div>
       </div>
     </div>

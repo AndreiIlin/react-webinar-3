@@ -5,23 +5,25 @@ import {numberFormat, plural} from "../../utils";
 import './style.css';
 import { NavLink } from 'react-router-dom';
 import { routes } from '../../routes.js';
+import { useTranslation } from '../../hooks/use-translation.js';
 
 function BasketTool({sum, amount, onOpen}) {
   const cn = bem('BasketTool');
+  const translate = useTranslation('basket');
   return (
     <div className={cn()}>
       <div className={cn('navigation')}>
-        <NavLink to={routes.mainPage()}>Главная</NavLink>
+        <NavLink to={routes.mainPage()}>{translate.main}</NavLink>
       </div>
       <div className={cn('body')}>
-        <span className={cn('label')}>В корзине:</span>
+        <span className={cn('label')}>{translate.inBasket}:</span>
         <span className={cn('total')}>
         {amount
-          ? `${amount} ${plural(amount, {one:'товар', few:'товара', many:'товаров'})} / ${numberFormat(sum)} ₽`
-          : `пусто`
+          ? `${amount} ${plural(amount, translate.tool)} / ${numberFormat(sum)} ₽`
+          : `${translate.empty}`
         }
       </span>
-        <button onClick={onOpen}>Перейти</button>
+        <button onClick={onOpen}>{translate.goTo}</button>
       </div>
     </div>
   );

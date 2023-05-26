@@ -6,6 +6,7 @@ import useSelector from '../../store/use-selector.js';
 import useStore from '../../store/use-store.js';
 import { useParams } from 'react-router-dom';
 import GoodInfo from '../../components/good-info/index.jsx';
+import { useTranslation } from '../../hooks/use-translation.js';
 
 function Good() {
   const store = useStore();
@@ -21,6 +22,8 @@ function Good() {
     goodInfo: state.good.goodInfo,
   }));
 
+  const translate = useTranslation('goodPage');
+
   const { goodId } = useParams();
 
   useEffect(() => {
@@ -30,7 +33,7 @@ function Good() {
 
   return (
     <PageLayout>
-      <Head title={'Магазин'} />
+      <Head title={translate.head} />
       <BasketTool
         onOpen={callbacks.openModalBasket} amount={select.amount}
         sum={select.sum}
