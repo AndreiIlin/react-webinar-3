@@ -6,6 +6,7 @@ import BasketTotal from '../../components/basket-total';
 import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
 import { useTranslation } from '../../hooks/use-translation.js';
+import { routes } from '../../routes.js';
 
 function Basket() {
   const store = useStore();
@@ -24,11 +25,11 @@ function Basket() {
     itemBasket: useCallback((item) => {
       return <ItemBasket
         item={item} onRemove={callbacks.removeFromBasket} closeModal={callbacks.closeModal}
+        linkToItemPage={routes.goodById(item._id)}
       />;
     }, [callbacks.removeFromBasket]),
   };
   const translate = useTranslation('basket');
-
   return (
     <ModalLayout title={translate.head} onClose={callbacks.closeModal}>
       <List list={select.list} renderItem={renders.itemBasket} />

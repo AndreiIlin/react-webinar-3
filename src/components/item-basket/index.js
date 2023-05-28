@@ -5,7 +5,6 @@ import { numberFormat } from '../../utils';
 import { cn as bem } from '@bem-react/classname';
 import './style.css';
 import { NavLink } from 'react-router-dom';
-import { routes } from '../../routes.js';
 import { useTranslation } from '../../hooks/use-translation.js';
 
 function ItemBasket(props) {
@@ -19,7 +18,7 @@ function ItemBasket(props) {
     <div className={cn()}>
       {/*<div className={cn('code')}>{props.item._id}</div>*/}
       <NavLink
-        to={routes.goodById(props.item._id)}
+        to={linkToItemPage}
         className={cn('title')}
         onClick={callbacks.closeModal}
       >{props.item.title}</NavLink>
@@ -41,6 +40,7 @@ ItemBasket.propTypes = {
     amount: PropTypes.number,
   }).isRequired,
   onRemove: propTypes.func,
+  linkToItemPage: PropTypes.string,
 };
 ItemBasket.defaultProps = {
   onRemove: () => {

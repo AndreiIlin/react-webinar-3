@@ -12,6 +12,7 @@ import { useTranslation } from '../../hooks/use-translation.js';
 import Navbar from '../../components/navbar/index.js';
 import LanguageSelect from '../../components/language-select/index.js';
 import LanguageSelectLayout from '../../components/language-select-layout/index.js';
+import { routes } from '../../routes.js';
 
 function Main() {
   const store = useStore();
@@ -36,7 +37,7 @@ function Main() {
   };
   const renders = {
     item: useCallback((item) => {
-      return <Item item={item} onAdd={callbacks.addToBasket} />;
+      return <Item item={item} onAdd={callbacks.addToBasket} linkToItemPage={routes.goodById(item._id)} />;
     }, [callbacks.addToBasket]),
   };
   const translate = useTranslation('mainPage');

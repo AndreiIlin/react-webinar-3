@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import PaginationCell from './pagination-cell/index.js';
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import './style.css';
 
 function Pagination({
@@ -8,8 +8,7 @@ function Pagination({
   changeActivePage,
   activePage,
 }) {
-  // const cells = useMemo(() => Array.from({ length: pagesCount }, (_, index) => index + 1), [pagesCount]);
-  const cells = Array.from({ length: pagesCount }, (_, index) => index + 1);
+  const cells = useMemo(() => Array.from({ length: pagesCount }, (_, index) => index + 1), [pagesCount]);
   const handleChangeActivePage = useCallback((cell) => () => changeActivePage(cell), []);
   return (
     <div className={'Pagination-container'}>

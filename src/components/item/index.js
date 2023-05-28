@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { cn as bem } from '@bem-react/classname';
 import { numberFormat } from '../../utils';
 import './style.css';
-import { routes } from '../../routes.js';
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from '../../hooks/use-translation.js';
 
@@ -16,7 +15,7 @@ function Item(props) {
   return (
     <div className={cn()}>
       {/*<div className={cn('code')}>{props.item._id}</div>*/}
-      <NavLink to={routes.goodById(props.item._id)} className={cn('title')}>
+      <NavLink to={props.linkToItemPage} className={cn('title')}>
         {props.item.title}
       </NavLink>
       <div className={cn('actions')}>
@@ -33,6 +32,7 @@ Item.propTypes = {
     price: PropTypes.number,
   }).isRequired,
   onAdd: PropTypes.func,
+  linkToItemPage: PropTypes.string,
 };
 Item.defaultProps = {
   onAdd: () => {
