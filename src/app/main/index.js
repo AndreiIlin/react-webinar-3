@@ -13,6 +13,7 @@ import Navbar from '../../components/navbar/index.js';
 import LanguageSelect from '../../components/language-select/index.js';
 import LanguageSelectLayout from '../../components/language-select-layout/index.js';
 import { routes } from '../../routes.js';
+import Basket from '../basket/index.js';
 
 function Main() {
   const store = useStore();
@@ -23,6 +24,7 @@ function Main() {
     activePage: state.catalog.activePage,
     pagesCount: state.catalog.pagesCount,
     locales: state.locales.availableLocales,
+    activeModal: state.modals.name,
   }));
   useEffect(() => {
     store.actions.catalog.load(select.activePage);
@@ -42,27 +44,31 @@ function Main() {
   };
   const translate = useTranslation('mainPage');
   return (
-    <PageLayout>
-      <Head title={translate.head}>
-        <LanguageSelectLayout>
-          <LanguageSelect changeLanguage={callbacks.changeLanguage} locales={select.locales} />
-        </LanguageSelectLayout>
-      </Head>
-      <BasketTool
-        onOpen={callbacks.openModalBasket} amount={select.amount}
-        sum={select.sum}
-      >
-        <Navbar />
-      </BasketTool>
-      <List list={select.list} renderItem={renders.item} />
-      {select.pagesCount ? (
-        <PaginationLayout>
-          <Pagination
-            activePage={select.activePage} pagesCount={select.pagesCount} changeActivePage={callbacks.changeActivePage}
-          />
-        </PaginationLayout>
-      ) : null}
-    </PageLayout>
+    <>
+      <PageLayout>
+        <Head title={translate.head}>
+          <LanguageSelectLayout>
+            <LanguageSelect changeLanguage={callbacks.changeLanguage} locales={select.locales} />
+          </LanguageSelectLayout>
+        </Head>
+        <BasketTool
+          onOpen={callbacks.openModalBasket} amount={select.amount}
+          sum={select.sum}
+        >
+          <Navbar />
+        </BasketTool>
+        <List list={select.list} renderItem={renders.item} />
+        {select.pagesCount ? (
+          <PaginationLayout>
+            <Pagination
+              activePage={select.activePage} pagesCount={select.pagesCount}
+              changeActivePage={callbacks.changeActivePage}
+            />
+          </PaginationLayout>
+        ) : null}
+      </PageLayout>
+      {select.activeModal === 'basket' && <Basket />}
+    </>
   );
 }
 export default memo(Main);

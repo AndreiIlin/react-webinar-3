@@ -9,6 +9,7 @@ import GoodInfo from '../../components/good-info/index.js';
 import Navbar from '../../components/navbar/index.js';
 import LanguageSelect from '../../components/language-select/index.js';
 import LanguageSelectLayout from '../../components/language-select-layout/index.js';
+import Basket from '../basket/index.js';
 
 function Good() {
   const store = useStore();
@@ -22,6 +23,7 @@ function Good() {
     sum: state.basket.sum,
     goodInfo: state.good.goodInfo,
     locales: state.locales.availableLocales,
+    activeModal: state.modals.name,
   }));
   const { goodId } = useParams();
   useEffect(() => {
@@ -29,22 +31,25 @@ function Good() {
     return () => store.actions.good.clear();
   }, []);
   return (
-    <PageLayout>
-      <Head title={select.goodInfo?.title}>
-        <LanguageSelectLayout>
-          <LanguageSelect changeLanguage={callbacks.changeLanguage} locales={select.locales} />
-        </LanguageSelectLayout>
-      </Head>
-      <BasketTool
-        onOpen={callbacks.openModalBasket} amount={select.amount}
-        sum={select.sum}
-      >
-        <Navbar />
-      </BasketTool>
-      {select.goodInfo ? (
-        <GoodInfo goodInfo={select.goodInfo} onAdd={callbacks.addToBasket} />
-      ) : null}
-    </PageLayout>
+    <>
+      <PageLayout>
+        <Head title={select.goodInfo?.title}>
+          <LanguageSelectLayout>
+            <LanguageSelect changeLanguage={callbacks.changeLanguage} locales={select.locales} />
+          </LanguageSelectLayout>
+        </Head>
+        <BasketTool
+          onOpen={callbacks.openModalBasket} amount={select.amount}
+          sum={select.sum}
+        >
+          <Navbar />
+        </BasketTool>
+        {select.goodInfo ? (
+          <GoodInfo goodInfo={select.goodInfo} onAdd={callbacks.addToBasket} />
+        ) : null}
+      </PageLayout>
+      {select.activeModal === 'basket' && <Basket />}
+    </>
   );
 }
 export default memo(Good);

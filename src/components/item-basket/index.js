@@ -18,7 +18,7 @@ function ItemBasket(props) {
     <div className={cn()}>
       {/*<div className={cn('code')}>{props.item._id}</div>*/}
       <NavLink
-        to={linkToItemPage}
+        to={props.linkToItemPage}
         className={cn('title')}
         onClick={callbacks.closeModal}
       >{props.item.title}</NavLink>
