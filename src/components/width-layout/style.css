@@ -1,0 +1,29 @@
+.WidthLayout {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  padding: 0;
+  gap: 5px;
+  align-items: center;
+}
+
+.WidthLayout_width_small {
+  width: 154px;
+}
+
+.WidthLayout_width_medium {
+  width: 316px;
+}
+
+.WidthLayout_width_large {
+  width: 478px;
+}
+
+.WidthLayout-item {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.WidthLayout-item > * {
+  flex: 1 1 auto;
+}

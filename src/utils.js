@@ -33,3 +33,75 @@ export function codeGenerator(start = 0) {
 export function numberFormat(value, locale = 'ru-RU', options = {}) {
   return new Intl.NumberFormat(locale, options).format(value);
 }
+
+
+/**
+ * Форматирование категорий товаров
+ * @param categories {Array}
+ * @returns {Array}
+ */
+export function formatCategories(categories) {
+  const formattedCategories = [];
+  const childs = [];
+  for (let i = 0; i < categories.length; i += 1) {
+    const category = categories[i];
+
+    if (category.parent !== null) {
+      childs.push(category);
+      continue;
+    }
+
+    formattedCategories.push({
+      value: category._id,
+      title: category.title,
+      lvl: 0,
+    });
+  }
+  while (childs.length) {
+    const child = childs.shift();
+
+    const parent = formattedCategories.find(category => category.value === child.parent._id);
+
+    if (!parent) childs.push(child);
+
+    const parentIndex = formattedCategories.indexOf(parent);
+
+    const formattedChild = {
+      value: child._id,
+      title: `${('-').repeat(parent.lvl + 1)} ${child.title}`,
+      lvl: parent.lvl + 1,
+    };
+
+    formattedCategories.splice(parentIndex + 1, 0, formattedChild);
+  }
+
+  return formattedCategories;
+}
+
+// Не понял, приходят ли с АПИ уже отсортированные категории или нет, резервный вариант с O(N)
+// export function formatCategories(categories) {
+//   const result = [];
+//
+//   for (let i = 0; i < categories.length; i += 1) {
+//     const category = categories[i];
+//     if (category.parent !== null) {
+//       result.push({
+//         value: category._id,
+//         title: category.title,
+//         lvl: 0,
+//       });
+//       continue;
+//     }
+//
+//     const parent = result.find(formattedCategory => formattedCategory.value === category.parent._id);
+//     const parentIndex = result.indexOf(parent);
+//     const newItem = {
+//       value: category._id,
+//       title: `${('-').repeat(parent.lvl + 1)}${category.title}`,
+//       lvl: parent.lvl + 1,
+//     };
+//     result.splice(parentIndex + 1, 0, newItem);
+//   }
+//
+//   return result;
+// }
