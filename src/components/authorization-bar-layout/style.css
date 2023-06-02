@@ -1,0 +1,9 @@
+.AuthorizationBarLayout {
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+}

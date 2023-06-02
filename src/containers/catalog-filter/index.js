@@ -5,7 +5,7 @@ import useSelector from "../../hooks/use-selector";
 import Select from "../../components/select";
 import Input from "../../components/input";
 import SideLayout from "../../components/side-layout";
-import { formatCategories, formatCategoryTitle } from '../../utils.js';
+import { formatCategories } from '../../utils.js';
 import WidthLayout from '../../components/width-layout/index.js';
 
 function CatalogFilter() {

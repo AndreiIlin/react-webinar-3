@@ -5,6 +5,11 @@ body {
   font-family: sans-serif;
 }
 
+p {
+  margin: 0;
+  padding: 0;
+}
+
 .PageLayout {
   max-width: 1024px;
   min-height: 100vh;

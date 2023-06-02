@@ -22,6 +22,8 @@ WidthLayout.propTypes = {
   width: PropTypes.oneOf(['small', 'medium', 'large']),
 }
 
-WidthLayout.defaultProps = {};
+WidthLayout.defaultProps = {
+  width: 'small',
+};
 
 export default memo(WidthLayout)

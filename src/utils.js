@@ -78,7 +78,7 @@ export function formatCategories(categories) {
   return formattedCategories;
 }
 
-// Не понял, приходят ли с АПИ уже отсортированные категории или нет, резервный вариант с O(N)
+// Не понял, приходят ли с АПИ уже отсортированные категории или нет, резервный вариант
 // export function formatCategories(categories) {
 //   const result = [];
 //

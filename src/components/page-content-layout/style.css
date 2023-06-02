@@ -1,0 +1,25 @@
+.PageContentLayout {
+  padding: 40px 20px 0;
+}
+
+.PageContentLayout-title {
+  margin: 0;
+}
+
+.PageContentLayout-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.PageContentLayout-content_marginTop_small {
+  margin-top: 17px;
+}
+
+.PageContentLayout-content_marginTop_medium {
+  margin-top: 30px;
+}
+
+.PageContentLayout-content_marginTop_large {
+  margin-top: 45px;
+}

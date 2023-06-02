@@ -10,6 +10,7 @@ import Navigation from "../../containers/navigation";
 import Spinner from "../../components/spinner";
 import ArticleCard from "../../components/article-card";
 import LocaleSelect from "../../containers/locale-select";
+import AuthorizationBar from '../../containers/authorization-bar/index.js';
 
 function Article() {
   const store = useStore();
@@ -34,7 +35,7 @@ function Article() {
   }
 
   return (
-    <PageLayout>
+    <PageLayout head={<AuthorizationBar />}>
       <Head title={select.article.title}>
         <LocaleSelect/>
       </Head>
