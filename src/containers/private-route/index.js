@@ -1,16 +1,20 @@
 import PropTypes from 'prop-types';
 import { memo } from 'react';
-import { useAuth } from '../../hooks/use-auth.js';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
+import useSelector from '../../hooks/use-selector.js';
 
 function PrivateRoute({ children }) {
-  const auth = useAuth();
+  const select = useSelector(state => ({
+    isLoggedIn: state.auth.isLoggedIn,
+  }));
 
-  return auth.isLoggedIn ? (
+  const location = useLocation();
+
+  return select.isLoggedIn ? (
     <>
       {children}
     </>
-  ) : <Navigate to={'/login'} replace />;
+  ) : <Navigate to={'/login'} state={location.pathname} />;
 }
 PrivateRoute.propTypes = {
   children: PropTypes.node,

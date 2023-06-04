@@ -3,26 +3,26 @@ import useTranslate from '../../hooks/use-translate.js';
 import PageContentLayout from '../../components/page-content-layout/index.js';
 import WidthLayout from '../../components/width-layout/index.js';
 import Input from '../../components/input/index.js';
-import { useAuth } from '../../hooks/use-auth.js';
 import ErrorMessage from '../../components/error-message/index.js';
 import { useLocation, useNavigate } from 'react-router-dom';
+import useStore from '../../hooks/use-store.js';
 
 function LoginForm() {
   const [error, setError] = useState('');
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [isDisabled, setIsDisabled] = useState(false);
-  const auth = useAuth();
+  const store = useStore();
   const navigate = useNavigate();
   const location = useLocation();
-  const prevLocation = location.state ?? '/';
+  const prevLocation = location.state === '/login' ? '/profile' : location.state ?? '/';
   const callbacks = {
     submitForm: useCallback(async (event) => {
       event.preventDefault();
       try {
         setIsDisabled(true);
         setError('');
-        await auth.login({
+        await store.actions.auth.login(window.localStorage, {
           login,
           password,
         });

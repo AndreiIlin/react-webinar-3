@@ -7,6 +7,8 @@ import Article from "./article";
 import Login from './login/index.js';
 import Profile from './profile/index.js';
 import PrivateRoute from '../containers/private-route/index.js';
+import useInit from '../hooks/use-init.js';
+import useStore from '../hooks/use-store.js';
 
 /**
  * Приложение
@@ -14,7 +16,13 @@ import PrivateRoute from '../containers/private-route/index.js';
  */
 function App() {
 
+  const store = useStore();
+
   const activeModal = useSelector(state => state.modals.name);
+
+  useInit(() => {
+    store.actions.auth.init(window.localStorage);
+  } ,[])
 
   return (
     <>

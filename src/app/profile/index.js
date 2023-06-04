@@ -4,19 +4,28 @@ import LocaleSelect from '../../containers/locale-select/index.js';
 import Head from '../../components/head/index.js';
 import useTranslate from '../../hooks/use-translate.js';
 import useStore from '../../hooks/use-store.js';
-import { useAuth } from '../../hooks/use-auth.js';
 import useInit from '../../hooks/use-init.js';
 import ProfileInfo from '../../containers/profile-info/index.js';
 import Navigation from '../../containers/navigation/index.js';
 import AuthorizationBar from '../../containers/authorization-bar/index.js';
+import useSelector from '../../hooks/use-selector.js';
 
 function Profile() {
-  const auth = useAuth();
   const { t } = useTranslate();
   const store = useStore();
+  const select = useSelector(state => ({
+    authError: state.user.error,
+    userData: state.auth.userData,
+  }));
+
   useInit(() => {
-    store.actions.user.load(auth.userData.token);
-  }, [auth.userData.token]);
+    store.actions.user.load(select.userData.token);
+  }, [select.userData.token]);
+
+  if (select.authError) {
+    store.actions.auth.logout(window.localStorage);
+  }
+
   return (
     <PageLayout head={<AuthorizationBar />}>
       <Head title={t('title')}>

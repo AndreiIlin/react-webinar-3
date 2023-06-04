@@ -15,10 +15,12 @@ function Input(props) {
     [props.onChange, props.name]
   );
 
+  const onChangeNotDebounced = useCallback(value => props.onChange(value, props.name), [props.onChange, props.name]);
+
   // Обработчик изменений в поле
   const onChange = (event) => {
     setValue(event.target.value);
-    onChangeDebounce(event.target.value);
+    props.debounced ? onChangeDebounce(event.target.value) : onChangeNotDebounced(event.target.value);
   };
 
   // Обновление стейта, если передан новый value
@@ -43,12 +45,14 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
   theme: PropTypes.string,
+  debounced: PropTypes.bool,
 }
 
 Input.defaultProps = {
   onChange: () => {},
   type: 'text',
-  theme: ''
+  theme: '',
+  debounced: false,
 }
 
 export default memo(Input);

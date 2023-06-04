@@ -13,14 +13,14 @@ function CatalogFilter() {
   const store = useStore();
 
   useLayoutEffect(() => {
-    store.actions.catalog.getCategories();
+    store.actions.categories.loadCategories();
   }, []);
 
   const select = useSelector(state => ({
     sort: state.catalog.params.sort,
     query: state.catalog.params.query,
     category: state.catalog.params.category,
-    categories: state.catalog.categories,
+    categories: state.categories.storeCategories,
   }));
 
   const callbacks = {
@@ -29,7 +29,10 @@ function CatalogFilter() {
     // Поиск
     onSearch: useCallback(query => store.actions.catalog.setParams({query, page: 1}), [store]),
     // Выбор категории
-    onCategorySort: useCallback(category => store.actions.catalog.setParams({category, page: 1}), [store]),
+    onCategorySort: useCallback(category => {
+      store.actions.categories.changeCategory(category)
+      store.actions.catalog.setParams({category, page: 1})
+    }, [store]),
     // Сброс
     onReset: useCallback(() => store.actions.catalog.resetParams(), [store]),
   };
@@ -54,7 +57,7 @@ function CatalogFilter() {
       <Select options={options.categories} value={select.category} onChange={callbacks.onCategorySort} />
       <Select options={options.sort} value={select.sort} onChange={callbacks.onSort}/>
       <WidthLayout width={'medium'}>
-        <Input value={select.query} onChange={callbacks.onSearch} placeholder={'Поиск'}
+        <Input debounced value={select.query} onChange={callbacks.onSearch} placeholder={'Поиск'}
                delay={1000}/>
       </WidthLayout>
       <button onClick={callbacks.onReset}>{t('filter.reset')}</button>

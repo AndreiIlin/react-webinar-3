@@ -4,7 +4,7 @@ class UserState extends StoreModule {
   initState() {
     return {
       userInfo: {},
-      loadingError: '',
+      error: '',
       waiting: false,
     };
   }
@@ -12,7 +12,7 @@ class UserState extends StoreModule {
   async load(token) {
     this.setState({
       userInfo: {},
-      loadingError: '',
+      error: '',
       waiting: true,
     })
     try {
@@ -34,13 +34,13 @@ class UserState extends StoreModule {
       this.setState({
         ...this.getState(),
         userInfo: json.result,
-        loadingError: '',
+        error: '',
         waiting: false,
       }, 'Загружены данные о пользователе из АПИ');
     } catch (err) {
       this.setState({
         ...this.getState(),
-        loadingError: err.message,
+        error: err.message,
         waiting: false,
       }, 'Произошла ошибка при получении данных пользователя');
     }
