@@ -12,7 +12,7 @@ class CategoriesState extends StoreModule {
    * Подгружаем список категорий товаров
    * @returns {Promise<void>}
    */
-  async loadCategories(formatter) {
+  async loadCategories() {
     const response = await fetch('/api/v1/categories?fields=_id,title,parent(_id)&limit=*');
     const json = await response.json();
     this.setState({
