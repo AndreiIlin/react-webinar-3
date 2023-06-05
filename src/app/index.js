@@ -16,13 +16,7 @@ import useStore from '../hooks/use-store.js';
  */
 function App() {
 
-  const store = useStore();
-
   const activeModal = useSelector(state => state.modals.name);
-
-  useInit(() => {
-    store.actions.auth.init(window.localStorage);
-  } ,[])
 
   return (
     <>

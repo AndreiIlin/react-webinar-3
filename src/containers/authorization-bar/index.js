@@ -15,7 +15,7 @@ function AuthorizationBar() {
     isLoggedIn: state.auth.isLoggedIn,
   }));
   const callbacks = {
-    logout: () => store.actions.auth.logout(window.localStorage),
+    logout: () => store.actions.auth.logout(),
     goToLoginPage: () => navigate('/login', {
       state: location.pathname,
     }),

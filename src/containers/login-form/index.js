@@ -22,7 +22,7 @@ function LoginForm() {
       try {
         setIsDisabled(true);
         setError('');
-        await store.actions.auth.login(window.localStorage, {
+        await store.actions.auth.login({
           login,
           password,
         });

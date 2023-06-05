@@ -3,24 +3,15 @@ import StoreModule from '../module.js';
 const LOCALSTORAGE_KEY = 'ylab'; //TODO По хорошему, наверное, лучше вынести в env
 class AuthState extends StoreModule {
   initState() {
-    return {
+    const data = window.localStorage.getItem(LOCALSTORAGE_KEY);
+    if (!data) return {
       isLoggedIn: false,
       userData: {},
-    };
-  }
-
-  /**
-   * Инициализация параметров.
-   * @param storage {Object} хранилище данных
-   */
-  init(storage) {
-    const data = storage.getItem(LOCALSTORAGE_KEY);
-    if (!data) return;
-    this.setState({
-      ...this.getState(),
+    }
+    return {
       isLoggedIn: true,
       userData: JSON.parse(data),
-    }, 'Инициализация данных пользователя');
+    };
   }
 
   /**
@@ -28,7 +19,7 @@ class AuthState extends StoreModule {
    * @param storage {Object}
    * @param authData {Object}
    */
-  async login(storage, authData) {
+  async login( authData) {
     try {
       const response = await fetch(`/api/v1/users/sign?${new URLSearchParams({ fields: 'username' })}`, {
         method: 'POST',
@@ -48,7 +39,7 @@ class AuthState extends StoreModule {
         }, '');
         throw Error(errorMessage);
       }
-      storage.setItem(LOCALSTORAGE_KEY, JSON.stringify(json.result));
+      window.localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(json.result));
       this.setState({
         ...this.getState(),
         isLoggedIn: true,
@@ -63,7 +54,7 @@ class AuthState extends StoreModule {
    * Выход с сайта
    * @param storage {Object}
    */
-  async logout(storage) {
+  async logout() {
     const token = this.getState().userData.token;
     if (token) {
       await fetch('/api/v1/users/sign', {
@@ -74,7 +65,7 @@ class AuthState extends StoreModule {
         },
       });
     }
-    storage.removeItem(LOCALSTORAGE_KEY);
+    window.localStorage.removeItem(LOCALSTORAGE_KEY);
     this.setState({
       isLoggedIn: false,
       userData: {},

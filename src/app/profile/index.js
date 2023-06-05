@@ -23,7 +23,7 @@ function Profile() {
   }, [select.userData.token]);
 
   if (select.authError) {
-    store.actions.auth.logout(window.localStorage);
+    store.actions.auth.logout();
   }
 
   return (
