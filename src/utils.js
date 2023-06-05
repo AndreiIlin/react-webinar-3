@@ -38,37 +38,41 @@ export function numberFormat(value, locale = 'ru-RU', options = {}) {
  */
 export function formatCategories(categories) {
   const formattedCategories = [];
-  const childs = [];
+  let childrens = [];
+  let parentId;
+  let parentIndex;
   for (let i = 0; i < categories.length; i += 1) {
     const category = categories[i];
 
-    if (category.parent !== null) {
-      childs.push(category);
+    if (category.parent === null) {
+      formattedCategories.push({
+        value: category._id,
+        title: category.title,
+        lvl: 0,
+      });
+
       continue;
     }
 
-    formattedCategories.push({
-      value: category._id,
-      title: category.title,
-      lvl: 0,
-    });
-  }
-  while (childs.length) {
-    const child = childs.shift();
+    if (category.parent._id !== parentId) {
+      formattedCategories.splice(parentIndex + 1, 0, ...childrens);
+      childrens = [];
+      parentId = category.parent._id;
+      parentIndex = formattedCategories.findIndex(cat => cat.value === parentId);
+    }
 
-    const parent = formattedCategories.find(category => category.value === child.parent._id);
-
-    if (!parent) childs.push(child);
-
-    const parentIndex = formattedCategories.indexOf(parent);
-
+    const parent = formattedCategories.find(cat => cat.value === category.parent._id);
     const formattedChild = {
-      value: child._id,
-      title: `${('-').repeat(parent.lvl + 1)} ${child.title}`,
+      value: category._id,
+      title: `${('- ').repeat(parent.lvl + 1)}${category.title}`,
       lvl: parent.lvl + 1,
     };
 
-    formattedCategories.splice(parentIndex + 1, 0, formattedChild);
+    childrens.push(formattedChild);
+  }
+
+  if (childrens.length > 0) {
+    formattedCategories.splice(parentIndex + 1, 0, ...childrens);
   }
 
   return formattedCategories;
