@@ -82,4 +82,37 @@ describe('listToTree', () => {
       }
     ]);
   });
+
+  test('test3', () => {
+    const list = [
+      {_id: 1, text: 'Первый комментарий', parent: { _id: 10, _type: 'article'}},
+      {_id: 2, text: 'Второй комментарий', parent: { _id: 10, _type: 'article'}},
+      {_id: 3, text: 'Третий комментарий', parent: { _id: 10, _type: 'article'}},
+      {_id: 4, text: 'Четвертый комментарий', parent: { _id: 1, _type: 'comment'}},
+      {_id: 5, text: 'Пятый комментарий', parent: { _id: 3, _type: 'comment'}},
+      {_id: 6, text: 'Шестой комментарий', parent: { _id: 2, _type: 'comment'}},
+      {_id: 7, text: 'Седьмой комментарий', parent: { _id: 4, _type: 'comment'}},
+      {_id: 8, text: 'Восьмой комментарий', parent: { _id: 7, _type: 'comment'}},
+      {_id: 9, text: 'Восьмой комментарий', parent: { _id: 5, _type: 'comment'}},
+    ]
+
+    expect(listToTree(list, (item) =>  item.parent?._type === 'comment')).toEqual([
+      {_id: 1, text: 'Первый комментарий', parent: { _id: 10, _type: 'article'}, children: [
+          {_id: 4, text: 'Четвертый комментарий', parent: { _id: 1, _type: 'comment'}, children: [
+              {_id: 7, text: 'Седьмой комментарий', parent: { _id: 4, _type: 'comment'}, children: [
+                  {_id: 8, text: 'Восьмой комментарий', parent: { _id: 7, _type: 'comment'}, children: []},
+                ]},
+            ]},
+        ]},
+      {_id: 2, text: 'Второй комментарий', parent: { _id: 10, _type: 'article'}, children: [
+          {_id: 6, text: 'Шестой комментарий', parent: { _id: 2, _type: 'comment'}, children: []},
+        ]},
+      {_id: 3, text: 'Третий комментарий', parent: { _id: 10, _type: 'article'}, children: [
+          {_id: 5, text: 'Пятый комментарий', parent: { _id: 3, _type: 'comment'}, children: [
+              {_id: 9, text: 'Восьмой комментарий', parent: { _id: 5, _type: 'comment'}, children: []},
+            ]},
+        ]},
+    ])
+
+  })
 });

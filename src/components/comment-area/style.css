@@ -1,0 +1,67 @@
+.CommentArea {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.CommentArea-answer {
+  margin-top: 20px;
+}
+
+.CommentArea-title {
+  margin: 0;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.CommentArea-button-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 10px;
+}
+
+.CommentArea-button {
+  padding: 3px 8px 2px 9px;
+  cursor: pointer;
+}
+
+.CommentArea-textarea {
+  width: 100%;
+  padding: 4px 5px;
+  font-family: 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  resize: none;
+}
+
+.CommentArea-textarea::placeholder {
+  color: #000000;
+}
+
+.CommentArea-link {
+  color: #0087E9;
+  text-underline-offset: 2px;
+}
+
+.CommentArea-no-auth {
+  margin: 0;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+.CommentArea-link-cancel {
+  color: #666666;
+  text-underline-offset: 2px;
+}
+
+.CommentArea-error {
+  margin: 0;
+  font-size: 12px;
+  line-height: 14px;
+  color: red;
+}

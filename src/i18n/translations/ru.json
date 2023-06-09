@@ -22,5 +22,19 @@
   "auth.password": "Пароль",
   "auth.signIn": "Войти",
   "session.signIn": "Вход",
-  "session.signOut": "Выход"
+  "session.signOut": "Выход",
+  "comments.title": "Комментарии",
+  "comments.send": "Отправить",
+  "comments.cancel": "Отмена",
+  "comments.signIn": "Войдите",
+  "comments.toComment": ", чтобы иметь возможность комментировать",
+  "comments.toAnswer": ", чтобы иметь возможность ответить. ",
+  "comments.newComment": "Новый комментарий",
+  "comments.newAnswer": "Новый ответ",
+  "comments.answer": "Ответить",
+  "comments.session": "Восстановление сессии",
+  "comments.rootPlaceholder": "Текст",
+  "comments.childPlaceholder": "Мой ответ для",
+  "comments.removed": "Данный комментарий был удален",
+  "comments.sendError": "При отправке сообщения произошла ошибка"
 }

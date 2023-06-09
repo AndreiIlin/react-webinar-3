@@ -1,0 +1,96 @@
+.ItemComment {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ItemComment-title {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 10px;
+}
+
+.ItemComment-user {
+  margin: 0;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.ItemComment-user-self {
+  color: #666666;
+}
+
+.ItemComment-date {
+  margin: 0;
+  font-size: 12px;
+  line-height: 14px;
+  color: #666666;
+}
+
+.ItemComment-body {
+  margin: 0;
+  font-size: 14px;
+  line-height: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ItemComment-button {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  line-height: 14px;
+  color: #0087E9;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.ItemComment-deleted {
+  margin: 0;
+  font-size: 14px;
+  line-height: 16px;
+  font-style: italic;
+}
+
+.ItemComment-ml-1 {
+  margin-left: 30px;
+}
+
+.ItemComment-ml-2 {
+  margin-left: 60px;
+}
+
+.ItemComment-ml-3 {
+  margin-left: 90px;
+}
+
+.ItemComment-ml-4 {
+  margin-left: 120px;
+}
+
+.ItemComment-ml-5 {
+  margin-left: 150px;
+}
+
+.ItemComment-ml-6 {
+  margin-left: 180px;
+}
+
+.ItemComment-ml-7 {
+  margin-left: 210px;
+}
+
+.ItemComment-ml-8 {
+  margin-left: 240px;
+}
+
+.ItemComment-ml-9 {
+  margin-left: 270px;
+}
+
+.ItemComment-ml-10 {
+  margin-left: 300px;
+}

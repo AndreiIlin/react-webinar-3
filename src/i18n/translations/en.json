@@ -20,5 +20,19 @@
   "auth.password": "Password",
   "auth.signIn": "Sign in",
   "session.signIn": "Sign In",
-  "session.signOut": "Sign Out"
+  "session.signOut": "Sign Out",
+  "comments.title": "Comments",
+  "comments.send": "Send",
+  "comments.cancel": "Cancel",
+  "comments.signIn": "SingIn",
+  "comments.toComment": ", to be able to comment",
+  "comments.toAnswer": "to be able to answer. ",
+  "comments.newComment": "New comment",
+  "comments.newAnswer": "New answer",
+  "comments.answer": "Answer",
+  "comments.session": "Restore session",
+  "comments.rootPlaceholder": "Text",
+  "comments.childPlaceholder": "My answer for",
+  "comments.removed": "This comment was removed",
+  "comments.sendError": "An error occurred while sending this message"
 }
