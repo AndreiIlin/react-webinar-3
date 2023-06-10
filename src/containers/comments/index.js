@@ -48,8 +48,6 @@ function Comments() {
     isRootComment: useMemo(() => reduxSelect.commentId === reduxSelect.parentId, [reduxSelect.parentId, reduxSelect.commentId]),
   };
 
-  console.log(options.comments);
-
   const callbacks = {
     sendComment: useCallback(async (text) => {
       if (options.isRootComment) {
