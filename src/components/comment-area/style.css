@@ -6,7 +6,7 @@
 }
 
 .CommentArea-answer {
-  margin-top: 20px;
+  margin-top: 0;
 }
 
 .CommentArea-title {
@@ -37,10 +37,6 @@
   font-size: 14px;
   line-height: 16px;
   resize: none;
-}
-
-.CommentArea-textarea::placeholder {
-  color: #000000;
 }
 
 .CommentArea-link {

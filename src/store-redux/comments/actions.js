@@ -1,3 +1,5 @@
+import lastChildInfo from '../../utils/last-child-info/index.js';
+
 export default {
   /**
    * Загрузка комментариев к товару
@@ -55,10 +57,40 @@ export default {
    * @return {Function}
    */
   changeSendInfo: (info) => {
-    return (dispatch) => {
+    return (dispatch, getState) => {
+      if (info.type === 'head') {
+        dispatch({
+          type: 'comments/change-send-info',
+          payload: {
+            id: info.id,
+            commentAreaLocation: {
+              id: info.id,
+              type: info.type,
+            },
+          },
+        });
+        return;
+      }
+      const { comments } = getState();
+      console.log(comments);
+      const currentComment = comments.list.find(comment => comment._id === info.id);
+      if (!currentComment) return;
+
+      const {
+        result,
+        lvl,
+      } = lastChildInfo(currentComment);
+
       dispatch({
         type: 'comments/change-send-info',
-        payload: info,
+        payload: {
+          id: info.id,
+          commentAreaLocation: {
+            id: result,
+            type: 'comment',
+            lvl,
+          },
+        },
       });
     };
   },

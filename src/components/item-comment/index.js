@@ -1,10 +1,6 @@
 import { memo } from 'react';
 import './style.css';
 import PropTypes from 'prop-types';
-import classnameWithCount from '../../utils/classname-with-count/index.js';
-
-const MIN_LEVEL = 0;
-const MAX_LEVEL = 8;
 
 function ItemComment({
   username,
@@ -14,14 +10,12 @@ function ItemComment({
   t,
   isOwnComment,
   wasDeleted,
-  children,
-  level,
 }) {
 
   if (wasDeleted) {
     return (
       <div
-        className={`ItemComment ${classnameWithCount('ItemComment', 'ml', 1, 10, level)}`}
+        className={`ItemComment`}
       >
         <p className={'ItemComment-deleted'}>{t('comments.removed')}</p>
       </div>
@@ -29,7 +23,7 @@ function ItemComment({
   }
 
   return (
-    <div className={`ItemComment ${classnameWithCount('ItemComment', 'ml', 1, 10, level)}`}>
+    <div className={`ItemComment`}>
       <div className={'ItemComment-title'}>
         <p className={`ItemComment-user ${isOwnComment ? 'ItemComment-user-self' : ''}`}>{username}</p>
         <p className={'ItemComment-date'}>{created}</p>
@@ -38,7 +32,6 @@ function ItemComment({
       <div>
         <button className={'ItemComment-button'} onClick={answerFn}>{t('comments.answer')}</button>
       </div>
-      {children}
     </div>
   );
 }
@@ -51,8 +44,6 @@ ItemComment.propTypes = {
   answerFn: PropTypes.func,
   isOwnComment: PropTypes.bool,
   wasDeleted: PropTypes.bool,
-  children: PropTypes.node,
-  level: PropTypes.number,
 };
 
 ItemComment.defaultProps = {
@@ -61,7 +52,6 @@ ItemComment.defaultProps = {
   },
   isOwnComment: false,
   wasDeleted: false,
-  level: 0,
 };
 
 export default memo(ItemComment);

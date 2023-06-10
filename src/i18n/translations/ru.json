@@ -33,8 +33,6 @@
   "comments.newAnswer": "Новый ответ",
   "comments.answer": "Ответить",
   "comments.session": "Восстановление сессии",
-  "comments.rootPlaceholder": "Текст",
-  "comments.childPlaceholder": "Мой ответ для",
   "comments.removed": "Данный комментарий был удален",
   "comments.sendError": "При отправке сообщения произошла ошибка"
 }

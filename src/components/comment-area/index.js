@@ -11,7 +11,6 @@ function CommentArea({
   t,
   sendFn,
   cancelFn,
-  username,
   sendStatus,
   rowsCount,
   action,
@@ -40,6 +39,10 @@ function CommentArea({
   useEffect(() => {
     if (!isRootComment && isAuth) {
       textareaRef.current.select();
+      textareaRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
     }
   }, [isAuth]);
 
@@ -58,7 +61,6 @@ function CommentArea({
           <p className={'CommentArea-title'}>{isRootComment ? t('comments.newComment') : t('comments.newAnswer')}</p>
           <textarea
             ref={textareaRef}
-            placeholder={isRootComment ? t('comments.rootPlaceholder') : `${t('comments.childPlaceholder')} ${username}`}
             className={'CommentArea-textarea'}
             name="commentArea"
             id="commentArea"
@@ -86,7 +88,6 @@ CommentArea.propTypes = {
   t: PropTypes.func,
   sendFn: PropTypes.func,
   cancelFn: PropTypes.func,
-  username: PropTypes.string,
   sendStatus: PropTypes.string,
   rowsCount: PropTypes.number,
   action: PropTypes.string,

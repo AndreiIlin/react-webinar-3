@@ -13,6 +13,7 @@ import listToTree from '../../utils/list-to-tree/index.js';
 import ItemComment from '../../components/item-comment/index.js';
 import dateFormat from '../../utils/date-format.js';
 import commentsActions from '../../store-redux/comments/actions.js';
+import ItemCommentLayout from '../../components/item-comment-layout/index.js';
 
 function Comments() {
   const { t } = useTranslate();
@@ -28,6 +29,7 @@ function Comments() {
     parentId: state.comments.parentId,
     waiting: state.comments.waiting,
     sendStatus: state.comments.sendStatus,
+    commentAreaLocation: state.comments.commentAreaLocation,
   }), shallowequal);
 
   const storeSelect = useSelectorStore(state => ({
@@ -45,6 +47,8 @@ function Comments() {
     ), [reduxSelect.list]),
     isRootComment: useMemo(() => reduxSelect.commentId === reduxSelect.parentId, [reduxSelect.parentId, reduxSelect.commentId]),
   };
+
+  console.log(options.comments);
 
   const callbacks = {
     sendComment: useCallback(async (text) => {
@@ -67,13 +71,15 @@ function Comments() {
       }));
     }, [options.isRootComment, reduxSelect.parentId, reduxSelect.commentId]),
     backToHead: useCallback(() => {
-      dispatch(commentsActions.changeSendInfo({ id: reduxSelect.parentId }));
+      dispatch(commentsActions.changeSendInfo({
+        id: reduxSelect.parentId,
+        type: 'head',
+      }));
     }, [reduxSelect.parentId]),
-    answer: useCallback(({
-      id,
-    }) => () => {
+    answer: useCallback(({ id }) => () => {
       dispatch(commentsActions.changeSendInfo({
         id,
+        type: 'answer',
       }));
     }, []),
   };
@@ -91,28 +97,35 @@ function Comments() {
       });
 
       return (
-        <ItemComment
-          key={item._id} username={item.author.profile.name} t={t} isOwnComment={isOwnComment}
-          created={created} level={item.level} locale={storeSelect.locale}
-          text={item.text} wasDeleted={item.isDeleted} answerFn={callbacks.answer({
-          id: item._id,
-        })}
-        >
-          {reduxSelect.commentId === item._id && (
-            <CommentArea
-              t={t}
-              isAuth={storeSelect.exists}
-              back={{ back: location.pathname }}
-              loginLink={'/login'}
-              isRootComment={false}
-              cancelFn={callbacks.backToHead}
-              username={item.author.profile.name}
-              sendStatus={reduxSelect.sendStatus}
-              sendFn={callbacks.sendComment}
-              actionFn={callbacks.backToHead}
+        <React.Fragment key={item._id}>
+          <ItemCommentLayout level={item.level}>
+            <ItemComment
+              username={item.author.profile.name} t={t} isOwnComment={isOwnComment}
+              created={created} locale={storeSelect.locale}
+              text={item.text} wasDeleted={item.isDeleted} answerFn={callbacks.answer({
+              id: item._id,
+            })}
             />
+          </ItemCommentLayout>
+          {reduxSelect.commentAreaLocation.id === item._id && (
+            <ItemCommentLayout
+              level={item.level - (reduxSelect.commentAreaLocation.lvl - 1)}
+            >
+              <CommentArea
+                t={t}
+                isAuth={storeSelect.exists}
+                back={{ back: location.pathname }}
+                loginLink={'/login'}
+                isRootComment={false}
+                cancelFn={callbacks.backToHead}
+                username={item.author.profile.name}
+                sendStatus={reduxSelect.sendStatus}
+                sendFn={callbacks.sendComment}
+                actionFn={callbacks.backToHead}
+              />
+            </ItemCommentLayout>
           )}
-        </ItemComment>
+        </React.Fragment>
       );
     }, [storeSelect.username, t, reduxSelect.commentId, reduxSelect.sendStatus]),
   };

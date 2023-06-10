@@ -3,6 +3,7 @@ const initialState = {
   waiting: false,
   commentId: '',
   parentId: '',
+  commentAreaLocation: null,
   count: 0,
   sendStatus: 'idle',
 };
@@ -28,12 +29,17 @@ function reducer(state = initialState, action) {
         count: action.payload.data.count,
         parentId: action.payload.parentId,
         commentId: action.payload.parentId,
+        commentAreaLocation: {
+          id: action.payload.parentId,
+          type: 'head',
+        }
       };
 
     case 'comments/change-send-info':
       return {
         ...state,
         commentId: action.payload.id,
+        commentAreaLocation: action.payload.commentAreaLocation,
         sendStatus: 'idle',
       };
 
