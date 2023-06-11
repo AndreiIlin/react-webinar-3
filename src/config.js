@@ -21,7 +21,12 @@ const config = {
   },
   i18n: {
     locale: 'ru',
-    translations
+    translations,
+    servicesMethods: {
+      api: [
+        'setLocalesHeaders',
+      ]
+    }
   }
 }
 

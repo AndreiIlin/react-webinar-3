@@ -5,19 +5,31 @@ class I18nService {
    * @param services {Services} Менеджер сервисов
    * @param config {Object}
    * @param translations {Object} Объект с переводами текстов
+   * @param servicesUsage {boolean} Проверяем есть ли взаимодействие с другими сервисами
+   * @param servicesMethods {Object} Методы сервисов, которые взаимодействуют с данным сервисом
    */
   constructor(services, config = {}) {
     this.services = services;
     this.config = config;
-    this.translations = config.translations || {};
-    this.locale = config.locale || 'ru';
+    this.translations = this.config.translations || {};
+    this.locale = this.config.locale || 'ru';
+    this.servicesMethods = this.config.servicesMethods;
     this.listeners = [];
-    this.initRequestHeaders();
+
+    if (this.config.servicesMethods) {
+      this.setLocaleForServicesMethods();
+    }
   }
 
-
-  initRequestHeaders() {
-    this.services.api.setHeader('Accept-Language', this.locale);
+  /**
+   * Установка текущей локали для использующих ее методов сервисов
+   */
+  setLocaleForServicesMethods() {
+    for (const service of Object.keys(this.servicesMethods)) {
+      for (const method of this.servicesMethods[service]) {
+        this.services[service][method](this.locale);
+      }
+    }
   }
 
   /**
@@ -34,7 +46,10 @@ class I18nService {
    */
   setLocale(locale) {
     this.locale = locale;
-    this.services.api.setHeader('Accept-Language', locale);
+
+    if (this.config.servicesMethods) {
+      this.setLocaleForServicesMethods();
+    }
 
     for (const listener of this.listeners) listener();
   }
